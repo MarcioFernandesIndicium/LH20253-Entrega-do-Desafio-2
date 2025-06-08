@@ -1,15 +1,17 @@
 version: 1
 send_anonymous_usage_stats: true
-project_id: "tap-adventureworkapi"
+project_id: tap-adventureworkapi
 default_environment: test
 venv:
   backend: uv
 environments:
 - name: test
+  config:
+    destination_path: $TARGET_JSONL_DESTINATION_PATH/
 plugins:
   extractors:
-  - name: "tap-adventureworkapi"
-    namespace: "tap_adventureworkapi"
+  - name: tap-adventureworkapi
+    namespace: tap_adventureworkapi
     pip_url: -e .
     capabilities:
     - state
@@ -18,50 +20,87 @@ plugins:
     - about
     - stream-maps
 
+    # TODO: Declare default configuration values here:
+    settings_group_validation:
+    - [username, password]
+
+    # TODO: Declare default configuration values here:
     settings:
     - name: username
       label: Username
-      description: The username to use for authentication with the AdventureWorkAPI
+      description: The username to use for authentication with the 
+        AdventureWorkAPI
 
     - name: password
-      kind: password
+      kind: string
       label: Password
-      description: The password to use for authentication with the AdventureWorkAPI
+      description: The password to use for authentication with the 
+        AdventureWorkAPI
       sensitive: true
 
     - name: start_date
       kind: date_iso8601
       label: Start Date
-      description: Initial date to start extracting data from. Defaults to 2010-01-01T00:00:00Z.
+      description: Initial date to start extracting data from. Defaults to 
+        2010-01-01T00:00:00Z.
 
     - name: api_url
       label: API URL
       description: The base URL for the AdventureWorkAPI service
 
     # TODO: Declare required settings here:
-    settings_group_validation:
-    - [username, password]
-
-    # TODO: Declare default configuration values here:
     config:
       start_date: '2025-01-01T00:00:00Z'
-      
+
 
     select:
-       #- "SalesOrderHeader.*"
-       #- "SalesOrderDetail.*"
-       - "PurchaseOrderHeader.*"
-       - "PurchaseOrderDetail.*"
-      
+      #- "SalesOrderHeader.*"
+      #- "SalesOrderDetail.*"
+      #- PurchaseOrderHeader.*
+    - PurchaseOrderDetail.*
+
+
+  - name: tap-mssql
+    variant: buzzcutnorman
+    pip_url: git+https://github.com/BuzzCutNorman/tap-mssql.git
+    config:
+      dialect: mssql
+      driver_type: pyodbc
+      sqlalchemy_url_query:
+        driver: ODBC Driver 18 for SQL Server
+        TrustServerCertificate: Yes
+    select:
+    #- Sales-Currency.*
+    #- Sales-Customer.*
+    # - Sales-CountryRegionCurrency.*
+    # - Sales-CreditCard.*
+    # - Sales-CurrencyRate.*
+    # - Sales-PersonCreditCard.*
+    # - Sales-SalesOrderDetail.*
+    # - Sales-SalesOrderHeader.*
+    # - Sales-SalesOrderHeaderSalesReason.*
+    # - Sales-SalesPerson.*
+    # - Sales-SalesPersonQuatoHistory.*
+    # - Sales-SalesReason.*
+    # - Sales-SalesTaxRate.*
+    # - Sales-SalesTerritory.*
+    # - Sales-SalesTerritoryHistory.*
+    # - Sales-ShoppingCartItem.*
+    # - Sales-SpecialOffer.*
+    # - Sales-SpecialOfferProduct.*
+    # - Sales-Store.*
+    
+
 
   loaders:
   - name: target-jsonl
     variant: andyh1203
     pip_url: target-jsonl
     config:
-      destination_path: "output"
-      
-    
+      destination_path: $TARGET_JSONL_DESTINATION_PATH
+
+
+
 
 
 
