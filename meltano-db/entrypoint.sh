@@ -1,10 +1,11 @@
 #!/bin/bash
 
-echo "Setting up environment variables..."
-source .env
+echo "[$(date)] Iniciando extração do AdventureWorks..."
 
-echo "Extracting data from api to target-jsonl..."
-meltano run tap-adventureworks target-jsonl
+echo "Extraindo os dados do AdventureWorks..."
+meltano run tap-mssql target-jsonl || { echo "Erro na extração!"; exit 1; }
 
-echo "Import files to Databricks..."
-databricks fs cp ./output/ dbfs:/Volumes/ted_dev/dev_luiz_campos/raw/api/ --recursive
+echo "Extração concluída com sucesso!"
+
+# echo "Import files to Databricks..."
+# databricks fs cp ./output/ dbfs:/Volumes/ted_dev/dev_luiz_campos/raw/api/ --recursive

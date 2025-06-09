@@ -1,6 +1,6 @@
 version: 1
 send_anonymous_usage_stats: true
-project_id: tap-adventureworkapi
+project_id: tap-adventureworkdb
 default_environment: test
 venv:
   backend: uv
@@ -15,17 +15,14 @@ plugins:
     pip_url: git+https://github.com/BuzzCutNorman/tap-mssql.git
     config:
       dialect: mssql
-      driver_type: pyodbc
-      sqlalchemy_url_query:
-        driver: ODBC Driver 18 for SQL Server
-        TrustServerCertificate: Yes
+      driver_type: pymssql
     select:
-    #- Sales-Currency.*
-    #- Sales-Customer.*
-    # - Sales-CountryRegionCurrency.*
-    # - Sales-CreditCard.*
-    # - Sales-CurrencyRate.*
-    # - Sales-PersonCreditCard.*
+    - Sales-Currency.*
+    - Sales-Customer.*
+    - Sales-CountryRegionCurrency.*
+    - Sales-CreditCard.*
+    - Sales-CurrencyRate.*
+    - Sales-PersonCreditCard.*
     # - Sales-SalesOrderDetail.*
     # - Sales-SalesOrderHeader.*
     # - Sales-SalesOrderHeaderSalesReason.*
@@ -65,8 +62,8 @@ plugins:
     # - Purchasing-ProductVendor.*
     # - Purchasing-PurchaseOrderDetail.*
     # - Purchasing-PurchaseOrderHeader.*
-    - Purchasing-Vendor.*
-    - Purchasing-ShipMethod.*
+    # - Purchasing-Vendor.*
+    # - Purchasing-ShipMethod.*
 
 
   loaders:

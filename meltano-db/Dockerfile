@@ -6,9 +6,9 @@ RUN apt update && \
     apt install -y curl && \
     apt install -y unzip
 
-# RUN curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
+RUN curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
 
-WORKDIR /projects/tap-api
+WORKDIR /projects/meltano-db
 
 COPY . .
 
