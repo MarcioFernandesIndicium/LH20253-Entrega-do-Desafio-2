@@ -1,0 +1,85 @@
+version: 1
+send_anonymous_usage_stats: true
+project_id: tap-adventureworkapi
+default_environment: test
+venv:
+  backend: uv
+environments:
+- name: test
+  config:
+    destination_path: $TARGET_JSONL_DESTINATION_PATH/
+plugins:
+  extractors:
+  - name: tap-mssql
+    variant: buzzcutnorman
+    pip_url: git+https://github.com/BuzzCutNorman/tap-mssql.git
+    config:
+      dialect: mssql
+      driver_type: pyodbc
+      sqlalchemy_url_query:
+        driver: ODBC Driver 18 for SQL Server
+        TrustServerCertificate: Yes
+    select:
+    #- Sales-Currency.*
+    #- Sales-Customer.*
+    # - Sales-CountryRegionCurrency.*
+    # - Sales-CreditCard.*
+    # - Sales-CurrencyRate.*
+    # - Sales-PersonCreditCard.*
+    # - Sales-SalesOrderDetail.*
+    # - Sales-SalesOrderHeader.*
+    # - Sales-SalesOrderHeaderSalesReason.*
+    # - Sales-SalesPerson.*
+    # - Sales-SalesPersonQuatoHistory.*
+    # - Sales-SalesReason.*
+    # - Sales-SalesTaxRate.*
+    # - Sales-SalesTerritory.*
+    # - Sales-SalesTerritoryHistory.*
+    # - Sales-ShoppingCartItem.*
+    # - Sales-SpecialOffer.*
+    # - Sales-SpecialOfferProduct.*
+    # - Sales-Store.*
+    # - HumanResources-Department.*
+    # - HumanResources-Employee.*
+    # - HumanResources-EmployeeDepartmentHistory.*
+    # - HumanResources-EmployeePayHistory.*
+    # - Person-Address.*
+    # - Person-AddressType.*
+    # - Person-BusinessEntity.*
+    # - Person-BusinessEntityAddress.*
+    # - Person-BusinessEntityContact.*
+    # - Person-ContactType.*
+    # - Person-CountryRegion.*
+    # - Person-EmailAddress.*
+    # - Person-Person.*
+    # - Person-PersonPhone.*
+    # - Person-PhoneNumberType.*
+    # - Person-StateProvince.*
+    # - Production-BillOfMaterials.*
+    # - Production-Product.*
+    # - Production-ProductCategory.*
+    # - Production-ProductCostHistory.*
+    # - Production-ProductDescription.*
+    # - Production-ProductSubcategory.*
+    # - Production-TransactionHistory.*
+    # - Purchasing-ProductVendor.*
+    # - Purchasing-PurchaseOrderDetail.*
+    # - Purchasing-PurchaseOrderHeader.*
+    - Purchasing-Vendor.*
+    - Purchasing-ShipMethod.*
+
+
+  loaders:
+  - name: target-jsonl
+    variant: andyh1203
+    pip_url: target-jsonl
+    config:
+      destination_path: $TARGET_JSONL_DESTINATION_PATH
+
+
+
+
+
+
+
+
