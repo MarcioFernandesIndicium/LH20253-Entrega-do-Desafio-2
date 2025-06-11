@@ -7,5 +7,5 @@ meltano run tap-adventureworkapi target-jsonl || { echo "Erro na extração!"; e
 
 echo "Extração concluída com sucesso!"
 
-# echo "Import files to Databricks..."
-# databricks fs cp ./output/ dbfs:/Volumes/ted_dev/dev_luiz_campos/raw/api/ --recursive
+echo "Import files to Databricks..."
+databricks fs cp /data/extract_from_api dbfs:/Volumes/ted_dev/dev_marcio_fernandes/raw --recursive

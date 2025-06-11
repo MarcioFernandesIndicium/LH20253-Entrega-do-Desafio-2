@@ -51,10 +51,10 @@ plugins:
 
 
     select:
-      #- "SalesOrderHeader.*"
+      - "SalesOrderHeader.*"
       #- "SalesOrderDetail.*"
-      - PurchaseOrderHeader.*
-      - PurchaseOrderDetail.*
+      #- PurchaseOrderHeader.*
+      #- PurchaseOrderDetail.*
 
 
   loaders:
