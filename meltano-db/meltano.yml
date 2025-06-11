@@ -17,9 +17,9 @@ plugins:
       dialect: mssql
       driver_type: pymssql
     select:
-    - Sales-Currency.*
-    - Sales-Customer.*
-    - Sales-CountryRegionCurrency.*
+    # - Sales-Currency.*
+    # - Sales-Customer.*
+    # - Sales-CountryRegionCurrency.*
     - Sales-CreditCard.*
     - Sales-CurrencyRate.*
     - Sales-PersonCreditCard.*
