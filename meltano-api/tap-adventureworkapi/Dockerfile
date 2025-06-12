@@ -17,5 +17,5 @@ RUN pip install -e .
 RUN meltano lock --update --all && \
     meltano install
 
-ENTRYPOINT [ "/bin/bash", "-c"]
-#ENTRYPOINT [ "./entrypoint.sh"]
+#ENTRYPOINT [ "/bin/bash", "-c"]
+ENTRYPOINT [ "./entrypoint.sh"]

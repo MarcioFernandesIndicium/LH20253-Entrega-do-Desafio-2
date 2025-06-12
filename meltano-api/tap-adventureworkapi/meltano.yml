@@ -48,21 +48,19 @@ plugins:
     # TODO: Declare required settings here:
     config:
       start_date: '2025-01-01T00:00:00Z'
+      username: $TAP_ADVENTUREWORKAPI_USERNAME
+      password: $TAP_ADVENTUREWORKAPI_PASSWORD
+      api_url: $TAP_ADVENTUREWORKAPI_API_URL
 
 
     select:
-      - "SalesOrderHeader.*"
-      #- "SalesOrderDetail.*"
-      #- PurchaseOrderHeader.*
-      #- PurchaseOrderDetail.*
+      # - "PurchaseOrderHeader.*"
+      # - "PurchaseOrderDetail.*"
+      # - "SalesOrderHeader.*"
+      - "SalesOrderDetail.*"
 
 
   loaders:
-  - name: target-jsonl
-    variant: andyh1203
-    pip_url: target-jsonl
-    config:
-      destination_path: $TARGET_JSONL_DESTINATION_PATH
 
   - name: target-parquet
     variant: automattic
