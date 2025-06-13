@@ -15,5 +15,5 @@ COPY . .
 RUN meltano lock --update --all && \
     meltano install
 
-# ENTRYPOINT [ "/bin/bash", "-c"]
+#ENTRYPOINT [ "/bin/bash", "-c"]
 ENTRYPOINT [ "./entrypoint.sh"]
