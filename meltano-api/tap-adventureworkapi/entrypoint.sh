@@ -3,9 +3,12 @@
 echo "[$(date)] Iniciando extração do AdventureWorks..."
 
 echo "Extraindo os dados do AdventureWorks..."
-meltano run tap-adventureworkapi target-jsonl || { echo "Erro na extração!"; exit 1; }
+meltano run tap-adventureworkapi target-parquet || { echo "Erro na extração!"; exit 1; }
 
 echo "Extração concluída com sucesso!"
 
-echo "Import files to Databricks..."
-databricks fs cp /data/extract_from_api dbfs:/Volumes/ted_dev/dev_marcio_fernandes/raw --recursive
+echo "Importanto os dados extraídos para o DBFS no Databricks..."
+databricks fs cp /data/extract_from_api dbfs:/Volumes/ted_dev/dev_marcio_fernandes/raw/extracted_from_api --recursive
+
+echo "Executando o job de criação de tabelas no Databricks..."
+databricks jobs run-now 69297142559683 || { echo "Erro ao executar o job de criação de tabelas!"; exit 1; }
