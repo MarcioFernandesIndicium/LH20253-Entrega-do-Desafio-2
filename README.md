@@ -37,7 +37,8 @@ Este projeto automatiza o processo de extração de dados de uma API e do banco 
 
 ## Visão geral do projeto
 
-(imagem aqui)
+![Diagrama da arquitetura](img/diagramaArquitetura.png)
+
 
 
 ## Instalação e configuração 
@@ -137,11 +138,26 @@ select:
 
 *   **Databricks**: As transformações e o esquema das tabelas Delta são definidos nos scripts Python através de notebooks dentro do Databricks. Certifique-se de que seu ambiente Databricks esteja configurado para receber os dados e que as permissões de acesso estejam corretas.
 
-No projeto você encontrará um diretório `scrips` e nele terá um modelo base do notebook usado no databricks, sinta-se a vontade para utiliza-lo 
+No projeto você encontrará um diretório `scrips` e nele terá um modelo base do notebook usado no databricks, sinta-se a vontade para utiliza-lo, basta substituir os parâmetros para o caminho correto no seu databricks
 
-Basta trocar nomenclaturas e caminhos dos diretórios para o seu formato. 
+```python
+dbutils.widgets.text("catalog", "", "Catalog")
+dbutils.widgets.text("schema", "", "Schema")
+dbutils.widgets.text("volume", "", "Volume")
+dbutils.widgets.text("source_folder", "", "Source Folder")
+```
 
-*No Databricks será necessário a criação de um job com a função de rodar o notebook criado, para isso siga as instruções da [documentação do Databricks](https://docs.databricks.com/aws/pt/jobs/jobs-quickstart) para mais detalhes. 
+*No Databricks será necessário a criação de um job com a função de rodar o notebook criado, para mais informações sobre "JOBS" consulte as instruções da [documentação do Databricks](https://docs.databricks.com/aws/pt/jobs/jobs-quickstart).
+
+Siga as instruções para criação do job: 
+
+* Na plataforma do Databricks, vá na guia `Execução de jobs` e clique em `criar job`
+* De um nome para a tarefa. ex: executar_notebook
+* Escolha o tipo `notebook`
+* Origem: Espaço de trabalho 
+* Caminho: O caminho onde seu notebook está salvo. 
+* Compute: Serveless ou o cluster de sua preferência. 
+* Clique em `criar tarefa` e copie o id do job. 
 
 No `entrypoint.sh` altere o id no comando: 
 
@@ -149,11 +165,10 @@ No `entrypoint.sh` altere o id no comando:
 databricks jobs run-now <COLOQUE AQUI SEU ID> 
 ```
 
+Feito essas alterações, seu projeto está todo configurado para realizar a extração e carga dos dados provenientes da API e banco de dados da Adventure Works de maneira automatizada. 
 
 
-
-
-## 🤝 Contribuição
+## Contribuição
 
 Sinta-se à vontade para contribuir com este projeto. Para isso, siga os passos:
 
@@ -163,6 +178,3 @@ Sinta-se à vontade para contribuir com este projeto. Para isso, siga os passos:
 4.  Envie para a branch original (`git push origin feature/minha-nova-feature`).
 5.  Abra um Pull Request.
 
-## 📄 Licença
-
-Este projeto está licenciado sob a licença [Nome da Licença, ex: MIT License]. Veja o arquivo `LICENSE` para mais detalhes.

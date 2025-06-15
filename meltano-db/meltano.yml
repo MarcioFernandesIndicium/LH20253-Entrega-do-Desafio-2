@@ -16,8 +16,9 @@ plugins:
     config:
       dialect: mssql
       driver_type: pymssql
+
+    # TODO: Declare streams to extract here:  
     select:
-    
     - Sales-Currency.*
     - Sales-Customer.*
     - Sales-CountryRegionCurrency.*
