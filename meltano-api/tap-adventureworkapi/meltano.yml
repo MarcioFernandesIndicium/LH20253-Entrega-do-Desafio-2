@@ -52,11 +52,11 @@ plugins:
       password: $TAP_ADVENTUREWORKAPI_PASSWORD
       api_url: $TAP_ADVENTUREWORKAPI_API_URL
 
-
+    # TODO: Declare the streams to extract here:
     select:
-      # - "PurchaseOrderHeader.*"
-      # - "PurchaseOrderDetail.*"
-      # - "SalesOrderHeader.*"
+      - "PurchaseOrderHeader.*"
+      - "PurchaseOrderDetail.*"
+      - "SalesOrderHeader.*"
       - "SalesOrderDetail.*"
 
 

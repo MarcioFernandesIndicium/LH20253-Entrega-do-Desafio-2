@@ -28,7 +28,7 @@ class AdventureWorkAPIStream(RESTStream):
     """AdventureWorkAPI stream class."""
 
     MAX_PARALLEL_REQUESTS = 1
-    timeout = 10 
+    timeout = 10 # seconds
     
 
     # Update this value if necessary or override `parse_response`.
@@ -36,7 +36,7 @@ class AdventureWorkAPIStream(RESTStream):
 
     def get_new_paginator(self):
 
-        limit = self.config.get("limit", 130000)
+        limit = self.config.get("limit", 10000)
         return AdventureWorkOffsetPaginator(
             start_value=0,
             page_size=limit,
@@ -92,7 +92,7 @@ class AdventureWorkAPIStream(RESTStream):
             A dictionary of URL query parameters.
         """
         params: dict = {
-            "limit": self.config.get("limit", 130000),
+            "limit": self.config.get("limit", 10000),
             "offset": next_page_token or 0,
         }
         return params
