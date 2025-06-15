@@ -21,7 +21,19 @@ Este projeto automatiza o processo de extração de dados de uma API e do banco 
 
 ## Estrutura do Projeto 
 
-<pre> ```text ├── data │ ├── extract_from_api │ └── extract_from_db ├── meltano-api │ ├── tap-adventureworkapi │ └── Dockerfile ├── meltano-db │ └── Dockerfile ├── scripts ├── img └── README.md ``` </pre>
+```text 
+├── data
+    ├── extract_from_api
+    ├── extract_from_db
+├── meltano-api
+    ├── tap-adventureworkapi
+    ├── Dockerfile
+├── meltano-db
+    ├── Dockerfile
+├── scripts
+├── img
+└── README.md
+``` 
 
 
 
